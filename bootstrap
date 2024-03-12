@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Install asdf plugins
+if [[ ! -d "$HOME/.asdf" ]]; then
+  git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.14.0
+fi
+
+. "$HOME/.asdf/asdf.sh"
+cut -d' ' -f1 $HOME/.tool-versions|xargs -i asdf plugin add  {}
+asdf install
+
+pushd $HOME
+yadm clone https://github.com/davidKristiansen/dotfiles.git
+yadm checkout $HOME
+
